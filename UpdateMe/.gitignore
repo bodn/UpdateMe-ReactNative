@@ -7,7 +7,6 @@
 /node_modules
 
 # misc
-.env.local
 .env.test.local
 .env.production.local
 
