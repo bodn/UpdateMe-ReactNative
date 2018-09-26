@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
 
   twitterDot: {
-    backgroundColor: '#0084b4',
+    backgroundColor: '#00aced',
     borderRadius: moderateScale(8),
     width: moderateScale(5),
     height: moderateScale(5),
