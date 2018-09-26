@@ -1,14 +1,16 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import {Image} from 'react-native';
+import { moderateScale, scale } from '../../utils/ScalingUtils'
+import {Platform} from 'react-native';
 
 const Avatar = ({src, size}) => {
     return(
         <Image
             style={{
-                width: size,
-                height: size,
-                borderRadius: size,
+                width: moderateScale(size),
+                height: moderateScale(size),
+                borderRadius:(Platform.OS === 'ios' ? size/2 : size)
             }}
             source={{uri: src}} />
     )

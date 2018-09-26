@@ -59,7 +59,11 @@ export default class App extends Component {
                 Alert.alert('Calm Down')
               }}
             />
-          </View>
+            <InfluencerCard
+              avatar='https://yt3.ggpht.com/a-/ACSszfEGbyCokB_jO8kx2uokxt4vrFfjgK-YN8mGdA=s800-mo-c-c0xffffffff-rj-k-no'
+              user={new UserDetails('PewDiePie','Youtube Personality', 'YOUTUBE', '9999999', ['TWITCH','YOUTUBE','TWITTER'])}
+              />
+            </View>
         </ScrollView>
       </View>
     );
