@@ -94,7 +94,7 @@ class InfluencerCard extends Component {
                     <View style={s.statsContainer}>
                         <Text style={s.userCount}>
                             <Image style={s.followerIcon} source={require('../../resources/icon/follower-icon.png')} />
-                            <Text> 50000 </Text>
+                            <Text> {this.props.user.followerCount}</Text>
                             <Text style={{ fontSize: 8 }}> followers</Text>
                         </Text>
                         <Text style={s.lastActiveMessage}>~ last active null minutes ago</Text>

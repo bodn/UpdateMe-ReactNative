@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native'
-import { moderateScale, scale } from '../../utils/ScalingUtils'
+import { StyleSheet, Platform } from 'react-native'
+import { moderateScale, scale, verticalScale } from '../../utils/ScalingUtils'
 
 
 const styles = StyleSheet.create({
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
 
   twitterDot: {
-    backgroundColor: '#0084b4',
+    backgroundColor: '#00aced',
     borderRadius: moderateScale(8),
     width: moderateScale(5),
     height: moderateScale(5),
@@ -110,14 +110,14 @@ const styles = StyleSheet.create({
   },
 
   followerIcon: {
-    width: moderateScale(36),
+    width: moderateScale(24,1.25),
     height: moderateScale(24),
 
   },
 
   socialIcon: {
-    width: moderateScale(56),
-    height: moderateScale(56),
+    width: (Platform.OS === 'ios' ? moderateScale(48)/2 : moderateScale(52)),
+    height: (Platform.OS === 'ios' ? moderateScale(48)/2 : moderateScale(52)),
   }
 })
 
