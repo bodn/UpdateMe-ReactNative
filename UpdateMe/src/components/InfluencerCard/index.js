@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, span } from 'react-native';
 import s from './styles'
 
+import {formatNumber} from '../../utils/StringUtils';
 import Avatar from '../Avatar'
 
 
@@ -59,13 +60,15 @@ class InfluencerCard extends Component {
     render() {
         var platform = getPlatform(this.props.user.platform)
         return (
-            <TouchableOpacity
-                onPress={this.props.onPress}
+            <TouchableOpacity style={{paddingBottom: 5,}}
+            onPress={() => {
+                
+            }}
                 onLongPress={this.props.onLongPress}
             >
                 <View style={s.container} onPress={this.props.onPress}>
                     <View style={s.infoContainer}>
-                        <Avatar
+                        <Avatar 
                             src={this.props.avatar}
                             size={75} />
                         <View style={s.infoContainer}>
@@ -91,13 +94,15 @@ class InfluencerCard extends Component {
                         </View>
                     </View>
 
-                    <View style={s.statsContainer}>
+                    <View style={[s.statsContainer,{  
+                        borderColor: (this.props.user.platform === 'TWITCH' ? "rgba(100,65,165, 1)" : "rgba(255,0,0,1)"),
+                    }]}>
                         <Text style={s.userCount}>
                             <Image style={s.followerIcon} source={require('../../resources/icon/follower-icon.png')} />
-                            <Text> {this.props.user.followerCount}</Text>
+                            <Text> {formatNumber(this.props.user.followers)}</Text> 
                             <Text style={{ fontSize: 8 }}> followers</Text>
                         </Text>
-                        <Text style={s.lastActiveMessage}>~ last active null minutes ago</Text>
+                        <Text style={s.lastActiveMessage}>~ this is static message</Text>
                     </View>
                 </View>
             </TouchableOpacity>

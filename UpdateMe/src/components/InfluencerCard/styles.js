@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    borderColor: '#c3c3c3',
+    borderColor: '#c0c0c0',
     borderBottomWidth: 1,
     borderRadius: 12,
   },
@@ -81,8 +81,8 @@ const styles = StyleSheet.create({
   facebookDot:{
     backgroundColor: '#3B5998',
     borderRadius: moderateScale(8),
-    width: moderateScale(8),
-    height: moderateScale(8),
+    width: moderateScale(5),
+    height: moderateScale(5),
     marginTop: moderateScale(2),
   },
 
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   },
 
   lastActiveMessage: {
-    fontSize: moderateScale(11),
+    fontSize: moderateScale(14),
     color: '#D3D3D3',
     fontFamily: 'PTSans',
     flex: 1,
@@ -110,8 +110,8 @@ const styles = StyleSheet.create({
   },
 
   followerIcon: {
-    width: moderateScale(24,1.25),
-    height: moderateScale(24),
+    width: (Platform.OS === 'ios' ? moderateScale(24)/2 : moderateScale(24)),
+    height: (Platform.OS === 'ios' ? moderateScale(24)/2 : moderateScale(24)),
 
   },
 

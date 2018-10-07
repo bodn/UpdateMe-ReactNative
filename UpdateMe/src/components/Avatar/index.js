@@ -4,7 +4,7 @@ import {Image} from 'react-native';
 import { moderateScale, scale } from '../../utils/ScalingUtils'
 import {Platform} from 'react-native';
 
-const Avatar = ({src, size}) => {
+const Avatar = ({src, size, platform}) => {
     return(
         <Image
             style={{
