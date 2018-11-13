@@ -17,9 +17,9 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
-    marginLeft: moderateScale(16)
+    marginLeft: moderateScale(16),
   },
 
   statsContainer: {
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
 
   name: {
-    fontSize: moderateScale(24),
+    fontSize: moderateScale(32),
     color: 'black',
     fontFamily: 'roboto'
   },
@@ -49,9 +49,9 @@ const styles = StyleSheet.create({
 
   socialIndicators: {
     justifyContent: 'flex-end',
-    flexDirection: 'column',
+    flexDirection: 'row',
     width: moderateScale(8),
-    paddingRight: moderateScale(16),
+    paddingRight: 32,
   },
 
   twitchDot: {

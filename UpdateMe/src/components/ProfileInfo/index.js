@@ -122,7 +122,7 @@ class InfluencerCard extends Component {
                 <View style={s.infoContainer}>
                     <Avatar
                         src={this.props.avatar}
-                        size={75} />
+                        size={100} />
                     <View style={s.infoContainer}>
                         <View style={s.titleContainer}>
                             <Text
