@@ -4,7 +4,7 @@ import { getStatusBarHeight } from '../../config/index'
 const styles = StyleSheet.create({
 
   title: {
-    fontSize: 32,
+    fontSize: 24,
     color: 'black',
     fontFamily: 'PermanentMarker'
   },
@@ -18,8 +18,9 @@ const styles = StyleSheet.create({
   },
   outerContainer: {
     backgroundColor: 'white',
-    flex:1,
+    flex: 1,
     paddingHorizontal: 10,
+    height: Platform.OS === 'ios' ? 70 + getStatusBarHeight() : 40,
     ...Platform.select({
       ios: {
         paddingTop: getStatusBarHeight(),

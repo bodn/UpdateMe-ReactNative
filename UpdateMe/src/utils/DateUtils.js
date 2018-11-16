@@ -11,8 +11,12 @@ export function toTimeAgo(lastActive){
       var viewCount = formatNumber(res[1]);
       return res[0]+"  "+viewCount+ " viewers";
     }
-
-    var lastActiveDate = new Date(lastActive);
+    var lastActiveDate;
+    if(!lastActive.endsWith(".000+0000")){
+        lastActiveDate = new Date(lastActive.trim());
+    }else{
+        lastActiveDate = new Date(lastActive.substr(0, lastActive.lastIndexOf("\.")));
+    }
     var currentTime = new Date();
     
     var timeAgoDifference = currentTime.getTime() - lastActiveDate.getTime();
@@ -20,6 +24,7 @@ export function toTimeAgo(lastActive){
     var diffMinutes = timeAgoDifference / (60 * 1000) % 60;
     var diffHours = timeAgoDifference / (60 * 60 * 1000);
     var diffInDays = (timeAgoDifference) / (1000 * 60 * 60 * 24);
+    
     if(diffInDays > 1){
         var days = Math.round(diffInDays);
         if(days == 1){

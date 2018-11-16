@@ -4,8 +4,7 @@ import InfluencerCard from '../../components/InfluencerCard';
 import { createStackNavigator } from 'react-navigation';
 import Header from '../../components/Header';
 
-//Testing Component
-import YoutubePost from '../../components/YoutubePostCard';
+import Loader from '../../screens/loading/main/';
 
 export default class RetrieveProfiles extends Component {
     static navigationOptions = {
@@ -44,7 +43,7 @@ export default class RetrieveProfiles extends Component {
     render() {
         if (!this.state.isLoaded) {
             return (
-                <Text>waiting for response..</Text>
+                <Loader />
             );
         }
         else if (this.state.timePassed) {
@@ -58,7 +57,6 @@ export default class RetrieveProfiles extends Component {
                 return (
                     <TouchableOpacity key={profile.id}
                         onPress={() => {
-                            console.log(profile.id);
                             this.props.navigation.navigate('Details', {
                                 id: profile.id,
                                 name: profile.name,
@@ -84,17 +82,16 @@ export default class RetrieveProfiles extends Component {
                 );
             });
             return (
-                
+
                 <ScrollView
                     style={{ backgroundColor: 'white', height: '100%', }}
                     refreshControl={
                         <RefreshControl
-                          refreshing={this.state.refreshing}
-                          onRefresh={this._onRefresh}
+                            refreshing={this.state.refreshing}
+                            onRefresh={this._onRefresh}
                         />
-                      }
+                    }
                 >
-                    <YoutubePost/>
                     <View>
                         {contents}
                     </View>

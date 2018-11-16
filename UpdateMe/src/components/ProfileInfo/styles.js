@@ -3,32 +3,29 @@ import { moderateScale, scale, verticalScale } from '../../utils/ScalingUtils'
 
 
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
     paddingTop: moderateScale(20),
     paddingBottom: moderateScale(20),
     paddingLeft: moderateScale(10),
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    flexDirection: 'row',
+    // justifyContent: 'flex-start',
     borderColor: '#c0c0c0',
     borderBottomWidth: 1,
-    borderRadius: 12,
   },
   infoContainer: {
-    flex: 1,
+    // backgroundColor:'red',
     flexDirection: 'column',
-    alignItems: 'center',
     marginLeft: moderateScale(16),
   },
 
   statsContainer: {
-    justifyContent: 'flex-start',
     flex: 1,
     flexDirection: 'row',
     marginLeft: moderateScale(16),
     paddingTop: moderateScale(10),
-    alignSelf: 'baseline',
+    // alignSelf: 'baseline',
   },
 
   titleContainer: {
@@ -49,7 +46,7 @@ const styles = StyleSheet.create({
 
   socialIndicators: {
     justifyContent: 'flex-end',
-    flexDirection: 'row',
+    flexDirection: 'column',
     width: moderateScale(8),
     paddingRight: 32,
   },
@@ -70,7 +67,7 @@ const styles = StyleSheet.create({
     marginTop: moderateScale(2),
   },
 
-  youtubeDot:{
+  youtubeDot: {
     backgroundColor: '#ff0000',
     borderRadius: moderateScale(8),
     width: moderateScale(5),
@@ -78,7 +75,7 @@ const styles = StyleSheet.create({
     marginTop: moderateScale(2),
   },
 
-  facebookDot:{
+  facebookDot: {
     backgroundColor: '#3B5998',
     borderRadius: moderateScale(8),
     width: moderateScale(5),
@@ -87,10 +84,12 @@ const styles = StyleSheet.create({
   },
 
   userCount: {
-    flex: 1.5,
+    flex: 1,
     marginLeft: moderateScale(10),
-    fontSize: moderateScale(14),
-    color: 'gray',
+    fontSize: moderateScale(16),
+    fontFamily: 'Roboto',
+    color: 'black',
+    textAlign: 'center',
   },
 
   liveCount: {
@@ -102,18 +101,74 @@ const styles = StyleSheet.create({
   },
 
   lastActiveMessage: {
-    backgroundColor:'red'
+    fontSize: 14,
+    color: '#6e6e6e',
+    fontFamily: 'PTSans',
+    flex: 1,
+    justifyContent: 'flex-end',
+    textAlign: 'center',
+  },
+
+  followersColumn: {
+    justifyContent: 'center',
+    // backgroundColor:'brown',
+    paddingRight: 10,
+    flex: 1,
+  },
+
+  lastActiveColumn: {
+    //backgroundColor:'purple',
+    flex: 1,
+    flexDirection: 'column',
+
+  },
+
+  filterContainer: {
+   // backgroundColor: 'red',
+    justifyContent: "center",
+    alignItems: 'center',
+    flex: 1,
+    flexDirection: 'column',
+    borderRadius: 8,
+
+  },
+
+  filterIcon: {
+    borderRadius:8,
+    resizeMode:'cover',
+    width: (Platform.OS === 'ios' ? moderateScale(48) / 2 : moderateScale(36)),
+    height: (Platform.OS === 'ios' ? moderateScale(48) / 2 : moderateScale(36)),
   },
 
   followerIcon: {
-    width: (Platform.OS === 'ios' ? moderateScale(24)/2 : moderateScale(24)),
-    height: (Platform.OS === 'ios' ? moderateScale(24)/2 : moderateScale(24)),
+    resizeMode:'center',
+    width: (Platform.OS === 'ios' ? moderateScale(24) / 2 : moderateScale(24)),
+    height: (Platform.OS === 'ios' ? moderateScale(24) / 2 : moderateScale(24)),
 
   },
 
   socialIcon: {
-    width: (Platform.OS === 'ios' ? moderateScale(48)/2 : moderateScale(52)),
-    height: (Platform.OS === 'ios' ? moderateScale(48)/2 : moderateScale(52)),
+    backgroundColor:'white',
+    borderRadius:100,
+    width: (Platform.OS === 'ios' ? moderateScale(48) / 2 : moderateScale(52)),
+    height: (Platform.OS === 'ios' ? moderateScale(48) / 2 : moderateScale(52)),
+  },
+
+  filterBar:{
+    flex:1,
+    flexDirection:'row',
+    borderColor: '#c0c0c0',
+    borderBottomWidth: 1,
+  },
+
+  filterItem:{
+    flex:1,
+    borderRightWidth: 1,
+    borderRightColor: '#c0c0c0',
+    //backgroundColor: 'green',
+    padding: 10,
+    justifyContent: "center",
+    alignItems: 'center',
   }
 })
 
