@@ -1,29 +1,57 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, Platform,RefreshControl } from 'react-native'
+import { Text, View, ScrollView, Platform, RefreshControl } from 'react-native'
 import Header from '../../components/Header';
 import { Font } from 'expo';
 import { navigation } from 'react-navigation';
 import { getStatusBarHeight } from '../../config/index'
+import '../../config/global';
 
-
-import YoutubePost from '../../components/YoutubePostCard';
+import YoutubePost from '../../components/PostCard';
 import ProfileHeader from '../../components/ProfileHeader';
 import ProfileInfo from '../../components/ProfileInfo';
 
-import Loader from '../.././screens/loading/main'
+import Loader from '../.././screens/loading'
 export default class InfluencerProfile extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { isLoaded: false, timePassed: false, results: null, postResults: null,refreshing: false };
+    this.state = {
+      profileLoaded: false,
+      postsLoaded: false,
+      timePassed: false,
+      profileResults: null,
+      postResults: null,
+      refreshing: false
+    };
+
   }
 
+  handleToUpdate = (someArg) => {
+    console.log('Filter provided is: Youtube: ' + someArg.youtube + "- Twitch: " + someArg.twitch);
+    this.setState({ postsLoaded: false })
+    var filter = "filter?";
+    if (someArg.youtube)
+      filter += "youtube=true";
+    else
+      filter += "youtube=false";
+
+    filter += "&";
+    if (someArg.twitch)
+      filter += "twitch=true";
+    else
+      filter += "twitch=false";
+
+    const { navigation } = this.props;
+    const id = navigation.getParam('id');
+    this.fetchPosts(id, filter);
+
+  }
 
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: props => <ProfileHeader name={navigation.getParam('name')} />,
       headerStyle: {
-        height: Platform.OS === 'ios' ? 70 + getStatusBarHeight() : 40,
+        height: Platform.OS === 'ios' ? 40 + getStatusBarHeight() : 40,
         ...Platform.select({
           ios: {
             paddingTop: getStatusBarHeight(),
@@ -37,59 +65,75 @@ export default class InfluencerProfile extends Component {
 
   _onRefresh = () => {
     this.setState({ refreshing: true });
-    this.fetchData();
+    const { navigation } = this.props;
+    const id = navigation.getParam('id');
+
+    this.fetchProfileInfo(id.toString());
     this.setState({ refreshing: false });
 
-}
+  }
 
   componentDidMount() {
     const { navigation } = this.props;
     const id = navigation.getParam('id');
-    this.fetchData(id.toString());
+    this.fetchProfileInfo(id.toString());
+    this.fetchPosts(id.toString());
   }
 
 
-  fetchData(id) {
-    console.log("Fetching Profile: " + id);
-    var postResponse;
-    fetch('http://192.168.1.100:8080/v1/profiles/' + id)
+  fetchProfileInfo(id) {
+    console.log("fetchProfileInfo():: Fetching Profile: " + id);
+    fetch(global.backendAddress + '/v1/profiles/' + id)
       .then((response) => response.json())
       .then((responseData) => {
-
         this.setState({
-          isLoaded: true,
-          postResults: postResponse,
-          results: responseData
+          profileLoaded: true,
+          profileResults: responseData
         });
-      }).done();
-
-    console.log("Fetching Posts for : " + id)
-    fetch('http://192.168.1.100:8080/v1/profile/' + id + '/posts/filter?twitch=true&youtube=true')
-      .then((postResponse) => postResponse.json())
-      .then((postResponseData) => {
-        postResponse = postResponseData;
+      })
+      .catch(function (error) {
+        console.log("fetchProfileInfo():: Timed out error, unable to reach " + global.backendAddress);
       })
       .done();
   }
 
-
-
-  render() {
-    const { navigation } = this.props;
-    const name = navigation.getParam('name');
-    if (!this.state.isLoaded) {
-      return (
-        <Loader />
-      );
-    }
-    else if (this.state.timePassed) {
-      return (
-        <Text> Request has timed out</Text>
-      );
+  fetchPosts(id, filter) {
+    console.log("fetchPosts():: Fetching Posts for : " + id + " with filter: " + filter)
+    if (filter == null) {
+      fetch(global.backendAddress + '/v1/profile/' + id + '/posts/')
+        .then((postResponse) => postResponse.json())
+        .then((postResponseData) => {
+          this.setState({
+            postsLoaded: true,
+            postResults: postResponseData
+          });
+        })
+        .catch(function (error) {
+          console.log("fetchPosts():: Timed out error, unable to reach " + global.backendAddress);
+          console.log(error.toString());
+        })
+        .done();
     }
     else {
+      fetch(global.backendAddress + '/v1/profile/' + id + '/posts/' + filter)
+        .then((postResponse) => postResponse.json())
+        .then((postResponseData) => {
+          this.setState({
+            postsLoaded: true,
+            postResults: postResponseData
+          });
+        })
+        .catch(function (error) {
+          console.log("fetchPosts():: Timed out error, unable to reach " + global.backendAddress);
+          console.log(error.toString());
+        })
+        .done();
+    }
+  }
 
-      profileContents = this.state.results.profiles.map((profile) => {
+  renderProfileCard(profile) {
+    if (profile != null) {
+      profileContents = profile.profiles.map((profile) => {
         return (
           <ProfileInfo key={profile.id}
             avatar={profile.profileImage}
@@ -101,13 +145,27 @@ export default class InfluencerProfile extends Component {
               socialInd: profile.platforms,
               lastActiveTime: profile.lastActive
             }}
+            handleToUpdate={this.handleToUpdate}
           />
-
         );
       });
+      return profileContents;
+    }
+    else {
+      return (<Text>ERROR</Text>)
+    }
+  }
 
-      postContents = this.state.postResults.posts.map((post) => {
-        console.log(post.postThumbnail);
+  renderLoad() {
+    return (
+      <View>
+        <Loader />
+      </View>
+    );
+  }
+  renderPosts(posts) {
+    if (posts != null) {
+      postsList = posts.posts.map((post) => {
         return (
           <YoutubePost key={post.postId}
             title={post.postTitle}
@@ -120,21 +178,38 @@ export default class InfluencerProfile extends Component {
 
         );
       });
+      return postsList;
+    }
+  }
+
+  render() {
+    if (!this.state.profileLoaded) {
+      return (
+        <Loader />
+      );
+    }
+    else if (this.state.timePassed) {
+      return (
+        <Text> Request has timed out</Text>
+      );
+    }
+    else {
       return (
 
-        <ScrollView 
-        style={{ backgroundColor: 'white', height: '100%', }}
-        refreshControl={
-          <RefreshControl
+        <ScrollView
+          style={{ backgroundColor: 'white', height: '100%', }}
+          refreshControl={
+            <RefreshControl
               refreshing={this.state.refreshing}
               onRefresh={this._onRefresh}
-          />
-      }>
+            />
+          }>
           <View>
-            {profileContents}
+            {this.state.profileLoaded && this.renderProfileCard(this.state.profileResults)}
           </View>
+          {!this.state.postsLoaded && this.renderLoad()}
           <View>
-            {postContents}
+            {this.state.postsLoaded && this.renderPosts(this.state.postResults)}
           </View>
 
         </ScrollView>

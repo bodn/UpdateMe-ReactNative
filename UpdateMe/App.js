@@ -7,7 +7,7 @@ import { createStackNavigator } from 'react-navigation';
 import RetrieveProfiles from './src/service/RetrieveProfiles';
 
 import transitionConfig from './src/config/transitionConfig';
-import Loaded from './src/screens/loading/main'
+import Loaded from './src/screens/loading/'
 
 const Routes = createStackNavigator({
   Home: {

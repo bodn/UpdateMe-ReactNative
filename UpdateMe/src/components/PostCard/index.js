@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity, WebView, Button, Linking, Alert } from 'react-native';
+import { View, Text, Image, TouchableHighlight , WebView, Button, Linking, Alert } from 'react-native';
 import s from './styles'
 import { toTimeAgo } from '../../utils/DateUtils'
 import {formatNumber} from '../../utils/StringUtils';
 
-class YoutubePost extends Component {
+class Post extends Component {
 
     constructor(props) {
         super(props);
@@ -27,9 +27,7 @@ class YoutubePost extends Component {
                 source={{
                     uri: url,
                 }}
-                onNavigationStateChange={this.onNavigationStateChange}
                 startInLoadingState
-                scalesPageToFit
                 javaScriptEnabled
                 style={{ flex: 1 }}
             />
@@ -38,7 +36,7 @@ class YoutubePost extends Component {
 
     renderButton(url) {
         return (
-            <TouchableOpacity onPress={() => {
+            <TouchableHighlight  onPress={() => {
                 this.setState({
                     toggle: !this.state.toggle
                 })
@@ -49,13 +47,13 @@ class YoutubePost extends Component {
                     <Image source={require("../../../assets/icon/playButton.png")} style={s.playButton} />
 
                 </View>
-            </TouchableOpacity>
+            </TouchableHighlight >
         );
     }
 
     renderCloseButton() {
         return (
-            <TouchableOpacity
+            <TouchableHighlight 
                 style={s.closeButton}
                 onPress={() => {
                     this.setState({
@@ -63,7 +61,7 @@ class YoutubePost extends Component {
                     })
                 }}>
                 <Text style={s.closeButtonText}>Close</Text>
-            </TouchableOpacity>
+            </TouchableHighlight >
         );
     }
 
@@ -97,10 +95,10 @@ class YoutubePost extends Component {
         }
 
         formattedTitle = function (str) {
-            if (str.length > 30)
+            if (str.length > 35)
                 return {
                     textAlign: 'left',
-                    fontSize: 16,
+                    fontSize: 14,
                     color: 'black',
                     fontFamily: 'PTSans'
                 }
@@ -133,17 +131,18 @@ class YoutubePost extends Component {
                 <View style={s.bottomInfoContainer}>
                     <View style={s.infoContentsContainer}>
                         <View style={s.viewsContainer}>
-                            <Text style={s.viewsText}>{formatNumber(this.props.postViews)} viewes</Text>
+                            <Text style={s.viewsText}>{formatNumber(this.props.postViews)} views</Text>
                         </View>
                         <View style={s.dateContainer}>
+                        
                             <Text style={s.dateText}>{differenceTime}</Text>
                         </View>
                         <View style={s.buttonContainer}>
-                            <TouchableOpacity style={platformButton(this.props.platform)}
+                            <TouchableHighlight  style={platformButton(this.props.platform)}
                                 onPress={() => Linking.openURL(this.props.url)}
                             >
                                 <Text style={s.youtubeButtonText}>Open {platformName(this.props.platform)} App</Text>
-                            </TouchableOpacity>
+                            </TouchableHighlight >
                         </View>
 
                     </View>
@@ -156,4 +155,4 @@ class YoutubePost extends Component {
 }
 
 
-export default YoutubePost;
+export default Post;

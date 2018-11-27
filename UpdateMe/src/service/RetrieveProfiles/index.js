@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, RefreshControl, TouchableOpacity, ScrollView } from 'react-native';
 import InfluencerCard from '../../components/InfluencerCard';
-import { createStackNavigator } from 'react-navigation';
+import '../../config/global';
 import Header from '../../components/Header';
 
-import Loader from '../../screens/loading/main/';
+import Loader from '../../screens/loading/';
 
 export default class RetrieveProfiles extends Component {
     static navigationOptions = {
@@ -21,7 +21,7 @@ export default class RetrieveProfiles extends Component {
 
 
     fetchData() {
-        fetch('http://192.168.1.100:8080/v1/profiles/all')
+        fetch( global.backendAddress+'/v1/profiles/all', {timeout: 10000})
             .then((response) => response.json())
             .then((responseData) => {
                 this.setState({
@@ -29,6 +29,9 @@ export default class RetrieveProfiles extends Component {
                     results: responseData
                 });
             })
+            .catch(function(error) {
+                console.log("RetrieveProfiles():: Timed out error, unable to reach"+global.backendAddress+"/v1/profiles/all");
+              })
             .done();
     }
 

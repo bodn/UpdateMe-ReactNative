@@ -28,27 +28,33 @@ class ProfileInfo extends Component {
         this.state = { toggle: false, youtube: false, twitch: false };
     }
 
+
+
     filterSelected(state, id) {
-        console.log(state);
-        if (state) {
+        //console.log(state + " - " + id);
+        if (!state) {
             if (id == 4) {
                 return {
-                    flex: 1,
-                    borderRightWidth: 1,
+
+                    opacity: 1,
+                    borderRadius: 100,
+                    marginRight: 5,
+                    // borderRightWidth: 1,
                     borderRightColor: '#c0c0c0',
                     backgroundColor: 'rgb(255,0,0)',
-                    padding: 10,
+                    paddingVertical: 20,
                     justifyContent: "center",
                     alignItems: 'center',
                 }
             }
             else if (id == 1) {
                 return {
-                    flex: 1,
-                    borderRightWidth: 1,
+                    //borderRightWidth: 1,
+                    borderRadius: 100,
                     borderRightColor: '#c0c0c0',
                     backgroundColor: '#6441a5',
-                    padding: 10,
+                    marginRight: 5,
+                    paddingVertical: 20,
                     justifyContent: "center",
                     alignItems: 'center',
                 }
@@ -57,23 +63,20 @@ class ProfileInfo extends Component {
         else {
             if (id == 4) {
                 return {
-                    flex: 1,
-                    borderRightWidth: 1,
+                    //borderRightWidth: 1,
                     borderRightColor: '#c0c0c0',
-                    // backgroundColor: 'rgb(255,0,0)',
-                    padding: 10,
+                    backgroundColor: 'rgb(255,0,0)',
+                    opacity: 0.25,
+                    paddingVertical: 20,
                     justifyContent: "center",
                     alignItems: 'center',
                 }
             }
             else if (id == 1) {
                 return {
-                    borderRadius:12,
-                    flex: 1,
-                    borderRightWidth: 1,
-                    borderRightColor: '#c0c0c0',
-                    // backgroundColor: 'rgb(255,0,0)',
-                    padding: 10,
+                    opacity: 0.25,
+                    backgroundColor: '#6441a5',
+                    paddingVertical: 20,
                     justifyContent: "center",
                     alignItems: 'center',
                 }
@@ -82,28 +85,42 @@ class ProfileInfo extends Component {
     }
 
     renderFilterBar() {
+        var handleToUpdate = this.props.handleToUpdate;
+        var _styleYoutubeFilter = this.filterSelected(this.state.youtube, 4);
+        var _styleTwitchFilter = this.filterSelected(this.state.twitch, 1);
         return (
             <View style={s.filterBar}>
-                <TouchableOpacity
-                    onPress={() => {
-                        this.setState({
-                            youtube: !this.state.youtube
-                        })
-                    }}
-                    style={this.filterSelected(this.state.youtube, 4)}
+                <View style={{ flex: 1 }}>
+                    <TouchableOpacity
+                        style={_styleYoutubeFilter}
+                        onPress={() => {
+                            handleToUpdate({
+                                youtube: !this.state.youtube,
+                                twitch: this.state.twitch
+                            });
+                            this.setState({
+                                youtube: !this.state.youtube
+                            })
+                        }}
                     >
-                    <Image style={s.socialIcon} source={require('../../../assets/icon/youtubeIcon.png')} />
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={this.filterSelected(this.state.twitch, 1)}
-                    onPress={() => {
-                        this.setState({
-                            twitch: !this.state.twitch
-                        })
-                    }}>
-                    <Image style={s.socialIcon} source={require('../../../assets/icon/twitchIcon.png')} />
-                </TouchableOpacity>
+                    </TouchableOpacity>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableOpacity
+                        style={_styleTwitchFilter}
+                        onPress={() => {
+                            handleToUpdate({
+                                youtube: this.state.youtube,
+                                twitch: !this.state.twitch
+                            });
+                            this.setState({
+                                twitch: !this.state.twitch
+                            })
+                        }}>
+                    </TouchableOpacity>
+                </View>
             </View>
+
         );
     }
 
@@ -148,7 +165,8 @@ class ProfileInfo extends Component {
                         <View style={s.followersColumn}>
                             <Text style={{
                                 textAlign: "center",
-                                fontSize: 16,
+                                fontSize: 18,
+                                fontWeight: 'bold',
                             }}> Followers</Text>
                             <Text style={s.userCount}>
                                 {this.props.user.followers}
@@ -157,7 +175,8 @@ class ProfileInfo extends Component {
                         <View style={s.lastActiveColumn}>
                             <Text style={{
                                 textAlign: "center",
-                                fontSize: 16,
+                                fontWeight: 'bold',
+                                fontSize: 18,
                             }}>Last active</Text>
                             <View>
                                 <Text style={s.lastActiveMessage}>

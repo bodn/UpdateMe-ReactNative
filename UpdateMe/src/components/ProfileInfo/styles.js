@@ -35,13 +35,13 @@ const styles = StyleSheet.create({
   name: {
     fontSize: moderateScale(32),
     color: 'black',
-    fontFamily: 'roboto'
+  //  fontFamily: 'roboto'
   },
 
   description: {
     fontSize: moderateScale(11),
     color: 'gray',
-    fontFamily: 'roboto'
+  //  fontFamily: 'roboto'
   },
 
   socialIndicators: {
@@ -85,11 +85,10 @@ const styles = StyleSheet.create({
 
   userCount: {
     flex: 1,
-    marginLeft: moderateScale(10),
-    fontSize: moderateScale(16),
-    fontFamily: 'Roboto',
-    color: 'black',
     textAlign: 'center',
+    fontSize: moderateScale(24),
+   // fontFamily: 'Roboto',
+    color: 'black',
   },
 
   liveCount: {
@@ -101,7 +100,7 @@ const styles = StyleSheet.create({
   },
 
   lastActiveMessage: {
-    fontSize: 14,
+    fontSize: 24,
     color: '#6e6e6e',
     fontFamily: 'PTSans',
     flex: 1,
@@ -111,11 +110,9 @@ const styles = StyleSheet.create({
 
   followersColumn: {
     justifyContent: 'center',
-    // backgroundColor:'brown',
     paddingRight: 10,
     flex: 1,
   },
-
   lastActiveColumn: {
     //backgroundColor:'purple',
     flex: 1,

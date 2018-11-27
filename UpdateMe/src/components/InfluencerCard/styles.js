@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   },
 
   lastActiveMessage: {
-    backgroundColor:'red'
+    //backgroundColor:'red'
   },
 
   followerIcon: {
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
   socialIcon: {
     width: (Platform.OS === 'ios' ? moderateScale(48)/2 : moderateScale(52)),
     height: (Platform.OS === 'ios' ? moderateScale(48)/2 : moderateScale(52)),
-    backgroundColor:'red',
+    //backgroundColor:'red',
   }
 })
 

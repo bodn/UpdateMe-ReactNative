@@ -9,12 +9,14 @@ const styles = StyleSheet.create({
     paddingBottom: moderateScale(20),
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    // borderColor: '#c0c0c0',
-    // borderBottomWidth: 2,
+    borderColor: '#DCDCDC',
+    borderBottomWidth: 1,
   },
   topInfoContainer: {
     marginLeft: moderateScale(16),
-    width: '100%',
+    // borderColor: '#DCDCDC',
+    // borderBottomWidth: 1,
+    flex:1,
     flexDirection: 'row',
   },
 
@@ -42,8 +44,8 @@ const styles = StyleSheet.create({
 
   titleContainer: {
     paddingTop: moderateScale(24),
-    // borderBottomWidth: 2,
-    // borderBottomColor: 'gray',
+    justifyContent : 'center',
+    alignItems:'center',
     flexDirection:'row',
   },
 
@@ -56,6 +58,9 @@ const styles = StyleSheet.create({
 
   viewsContainer: {
     flex: 1,
+    borderColor: '#DCDCDC',
+    borderRightWidth: 1,
+
   },
   viewsText: {
     color: 'black',
@@ -70,6 +75,7 @@ const styles = StyleSheet.create({
   },
   dateText: {
     color: 'black',
+    fontWeight: 'bold',
     fontFamily: 'PTSans',
     fontSize: 12,
     textAlign: 'center',
@@ -97,7 +103,6 @@ const styles = StyleSheet.create({
   socialIconContainer: {
     width: (Platform.OS === 'ios' ? moderateScale(48)/2 : moderateScale(24)),
     height: (Platform.OS === 'ios' ? moderateScale(48)/2 : moderateScale(24)),
-    justifyContent : 'center',
     // backgroundColor:'blue'
   },
   stretch: {
@@ -130,9 +135,10 @@ const styles = StyleSheet.create({
   },
   socialIcon: {
     // resizeMode:'center',
-    width: (Platform.OS === 'ios' ? moderateScale(48)/2 : moderateScale(52)),
-    height: (Platform.OS === 'ios' ? moderateScale(48)/2 : moderateScale(52)),
-    // backgroundColor:'red'
+    width: (Platform.OS === 'ios' ? moderateScale(48)/2 : moderateScale(64)),
+    height: (Platform.OS === 'ios' ? moderateScale(48)/2 : moderateScale(64)),
+    // backgroundColor:'red',
+    alignSelf:'center',
     
   }
 
