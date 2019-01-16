@@ -5,7 +5,7 @@ Mobile front end component of the UpdateMe system.<br/>
 UpdateMe is an application to deliver you the activity of your favourite Youtuber/Livestreamer from different social media platforms
 under one simple interface. Gone are the days of bouncing between different applications just to get caught up.
 
-*Check out the [UpdateMe-SpringBoot-Backend](https://github.com/bodn/UpdateMe-SpringBoot-Backend) back end component*
+*Check out the [UpdateMe-SpringBoot](https://github.com/bodn/UpdateMe-SpringBoot) back end component*
 
 ## Setup
   *You must have [Node.js](https://nodejs.org/en/) installed on your computer and the Expo Client([iOS](https://itunes.apple.com/us/app/expo-client/id982107779?mt=8) or [Android](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en_CA))* installed on your mobile device
